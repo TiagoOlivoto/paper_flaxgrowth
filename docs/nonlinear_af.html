@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+    
+    
+    <title>Evolução da área foliar de duas cultivares de linho revelada pelo modelo Logístico</title>
+
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/readthedown-0.1/readthedown.css" rel="stylesheet" />
+        <link href="site_libs/readthedown-0.1/readthedown_fonts_embed.css" rel="stylesheet" />
+        <script src="site_libs/readthedown-0.1/readthedown.js"></script>
+        <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+        <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+        <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+        <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode
+        {  background-color: #f8f8f8; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ef2929; } /* Alert */
+      code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #c4a000; } /* Attribute */
+      code span.bn { color: #0000cf; } /* BaseN */
+      code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4e9a06; } /* Char */
+      code span.cn { color: #000000; } /* Constant */
+      code span.co { color: #8f5902; font-style: italic; } /* Comment */
+      code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+      code span.dt { color: #204a87; } /* DataType */
+      code span.dv { color: #0000cf; } /* DecVal */
+      code span.er { color: #a40000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #0000cf; } /* Float */
+      code span.fu { color: #000000; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+      code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+      code span.ot { color: #8f5902; } /* Other */
+      code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+      code span.sc { color: #000000; } /* SpecialChar */
+      code span.ss { color: #4e9a06; } /* SpecialString */
+      code span.st { color: #4e9a06; } /* String */
+      code span.va { color: #000000; } /* Variable */
+      code span.vs { color: #4e9a06; } /* VerbatimString */
+      code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+    </style>
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+   	
+         <!-- readthedown start -->   
+   <div id="content" data-toggle="wy-nav-shift">
+     <nav id="nav-top" role="navigation" aria-label="top navigation">
+       <a role="button" href="#" data-toggle="wy-nav-top"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+     </nav>
+         
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">RBras66 - Floripa</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">
+          <span class="fa fa-home"></span>
+           
+          Sobre
+        </a>
+      </li>
+      <li>
+        <a href="models.html">Modelos</a>
+      </li>
+      <li>
+        <a href="nonlinear_af.html">Área foliar</a>
+      </li>
+      <li>
+        <a href="nonlinear_nfol.html">Número de folhas</a>
+      </li>
+      <li>
+        <a href="nonlinear_amedfol.html">Tamanho folha</a>
+      </li>
+      <li>
+        <a href="">
+          <span class="ai ai ai ai-doi ai"></span>
+           
+          Doi
+        </a>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+        <a href="https://github.com/TiagoOlivoto/pliman">
+          <span class="fa fa-github"></span>
+           
+          pliman
+        </a>
+      </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Evolução da área foliar de duas cultivares de linho revelada pelo modelo Logístico</h1>
+      
+         <!-- readthedown authors -->
+   <div id="sidebar">
+    <h2><a href="#content">Evolução da área foliar de duas cultivares de linho revelada pelo modelo Logístico</a></h2>
+    <div id="toc">
+      <ul>
+      <li><a href="#pacotes" id="toc-pacotes"><span class="toc-section-number">1</span> Pacotes</a></li>
+      <li><a href="#dados" id="toc-dados"><span class="toc-section-number">2</span> Dados</a></li>
+      <li><a href="#computar-estatísticas" id="toc-computar-estatísticas"><span class="toc-section-number">3</span> Computar estatísticas</a></li>
+      <li><a href="#descritiva" id="toc-descritiva"><span class="toc-section-number">4</span> Descritiva</a></li>
+      <li><a href="#relação-área-foliar-x-altura-de-planta" id="toc-relação-área-foliar-x-altura-de-planta"><span class="toc-section-number">5</span> Relação área foliar x altura de planta</a></li>
+      <li><a href="#modelos-não-lineares" id="toc-modelos-não-lineares"><span class="toc-section-number">6</span> Modelos não lineares</a>
+      <ul>
+      <li><a href="#chutes-iniciais" id="toc-chutes-iniciais"><span class="toc-section-number">6.1</span> Chutes iniciais</a></li>
+      <li><a href="#full-model" id="toc-full-model"><span class="toc-section-number">6.2</span> Full model</a></li>
+      <li><a href="#efeito-aleatório-de-cultivar-no-parâmetro-b1" id="toc-efeito-aleatório-de-cultivar-no-parâmetro-b1"><span class="toc-section-number">6.3</span> Efeito aleatório de cultivar no parâmetro b1</a></li>
+      <li><a href="#efeito-aleatório-de-cultivar-no-parâmetro-b2" id="toc-efeito-aleatório-de-cultivar-no-parâmetro-b2"><span class="toc-section-number">6.4</span> Efeito aleatório de cultivar no parâmetro b2</a></li>
+      <li><a href="#efeito-aleatório-de-cultivar-no-parâmetro-b3" id="toc-efeito-aleatório-de-cultivar-no-parâmetro-b3"><span class="toc-section-number">6.5</span> Efeito aleatório de cultivar no parâmetro b3</a></li>
+      <li><a href="#modelo-ajustado" id="toc-modelo-ajustado"><span class="toc-section-number">6.6</span> Modelo ajustado</a></li>
+      <li><a href="#qualidade-de-ajuste" id="toc-qualidade-de-ajuste"><span class="toc-section-number">6.7</span> Qualidade de ajuste</a></li>
+      <li><a href="#primeira-derivada" id="toc-primeira-derivada"><span class="toc-section-number">6.8</span> Primeira derivada</a></li>
+      <li><a href="#segunda-derivada" id="toc-segunda-derivada"><span class="toc-section-number">6.9</span> Segunda derivada</a></li>
+      </ul></li>
+      <li><a href="#section-info" id="toc-section-info"><span class="toc-section-number">7</span> Section info</a></li>
+      </ul>
+    </div>
+    <div id="postamble" data-toggle="wy-nav-shift" class="status">
+                </div>
+   </div>
+     
+
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="main">
+<div id="pacotes" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Pacotes</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metan)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpanel)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hydroGOF)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>my_theme <span class="ot">&lt;-</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(), <span class="co">#remove minor gridlines</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<div id="dados" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Dados</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;data/area_foliar.xlsx&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_ap <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;data/df_ap.xlsx&quot;</span>)</span></code></pre></div>
+</div>
+<div id="computar-estatísticas" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Computar estatísticas</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># criar as médias</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_nlm <span class="ot">&lt;-</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(data, das, bloco, cultivar, planta) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">af_planta =</span> <span class="fu">sum</span>(area),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">area_media =</span> <span class="fu">mean</span>(area),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">comp_medio =</span> <span class="fu">mean</span>(length)) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_ap) <span class="sc">|&gt;</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># média cultivar das</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>df_modelos <span class="ot">&lt;-</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  df_nlm <span class="sc">|&gt;</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">means_by</span>(das, cultivar) <span class="sc">|&gt;</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">das =</span> <span class="fu">as.numeric</span>(das))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>df_grouped <span class="ot">&lt;-</span> </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">groupedData</span>(<span class="at">formula =</span> area_media <span class="sc">~</span> das<span class="sc">|</span>cultivar, </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> df_nlm,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">order.groups =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="descritiva" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Descritiva</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_nlm, <span class="fu">aes</span>(das, af_planta, <span class="at">color =</span> cultivar)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  my_theme <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;brown&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  my_theme <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">120</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Cultivar&quot;</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(Área<span class="sc">~</span>foliar<span class="sc">~</span>da<span class="sc">~</span>planta<span class="sc">~</span>(cm<span class="sc">^</span><span class="dv">2</span><span class="sc">~</span>planta<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}))) <span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p><img src="nonlinear_af_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figs/desc_af.png&quot;</span>, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
+</div>
+<div id="relação-área-foliar-x-altura-de-planta" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Relação área foliar x altura de planta</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_nlm <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(cp, af_planta, <span class="at">color =</span> cultivar)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;brown&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Comprimento da planta (cm)&quot;</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(Área<span class="sc">~</span>foliar<span class="sc">~</span>da<span class="sc">~</span>planta<span class="sc">~</span>(cm<span class="sc">^</span><span class="dv">2</span><span class="sc">~</span>planta<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}))) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">stat_regline_equation</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(..eq.label.., ..adj.rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~~&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  my_theme </span></code></pre></div>
+<p><img src="nonlinear_af_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figs/cp_af.png&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
+</div>
+<div id="modelos-não-lineares" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Modelos não lineares</h1>
+<div id="chutes-iniciais" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Chutes iniciais</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/walmes/wzRfun/master/R/rp.nls.R&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> af_planta <span class="sc">~</span> b1 <span class="sc">-</span> (b2<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>b3<span class="sc">*</span>das))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>start_brody <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">b1 =</span> <span class="dv">100</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b2 =</span> <span class="dv">20</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b3 =</span> <span class="fl">0.1</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> af_planta <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">b1 =</span> <span class="fu">c</span>(<span class="at">init =</span> <span class="dv">20</span>, <span class="at">from =</span> <span class="dv">20</span>, <span class="at">to =</span> <span class="dv">200</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">b2 =</span> <span class="fu">c</span>(<span class="at">init =</span> <span class="dv">1</span>, <span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">200</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">b3 =</span> <span class="fu">c</span>(<span class="at">init =</span> <span class="fl">0.01</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>par_mvr <span class="ot">&lt;-</span> <span class="fu">rp.nls</span>(<span class="at">model =</span> model,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> df_nlm <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">start =</span> start)</span></code></pre></div>
+</div>
+<div id="full-model" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Full model</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full model</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>full <span class="ot">&lt;-</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nls</span>(af_planta <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das)),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> df_nlm,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">start =</span> <span class="fu">c</span>(<span class="at">b1 =</span> <span class="dv">120</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">b2 =</span> <span class="dv">3</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">b3 =</span> <span class="fl">0.05</span>))</span></code></pre></div>
+</div>
+<div id="efeito-aleatório-de-cultivar-no-parâmetro-b1" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Efeito aleatório de cultivar no parâmetro b1</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mix_b1 <span class="ot">&lt;-</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nlme</span>(af_planta <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das)),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> df_grouped,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">fixed =</span> b1 <span class="sc">+</span> b2 <span class="sc">+</span> b3 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">random =</span> b1 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">start =</span> <span class="fu">c</span>(<span class="at">b1 =</span> <span class="dv">120</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b2 =</span> <span class="dv">3</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b3 =</span> <span class="fl">0.05</span>))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mix_b1)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Nonlinear mixed-effects model fit by maximum likelihood</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   Model: af_planta ~ b1/(1 + exp(b2 - b3 * das)) </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   Data: df_grouped </span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">##        AIC      BIC    logLik</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   1279.017 1293.866 -634.5083</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  Formula: b1 ~ 1 | cultivar</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">##               b1 Residual</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="do">## StdDev: 14.32326 19.45384</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:  b1 + b2 + b3 ~ 1 </span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="do">##       Value Std.Error  DF  t-value p-value</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="do">## b1 97.96692 11.081330 140 8.840718       0</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="do">## b2  7.48473  1.011375 140 7.400544       0</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="do">## b3  0.11229  0.016022 140 7.008364       0</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  Correlation: </span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="do">##    b1     b2    </span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="do">## b2 -0.201       </span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="do">## b3 -0.234  0.987</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Standardized Within-Group Residuals:</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="do">##         Min          Q1         Med          Q3         Max </span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.24183337 -0.51983734  0.08200329  0.41242684  4.56882462 </span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Observations: 144</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Groups: 2</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(mix_b1)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["b1"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"-13.87225","_rn_":"Dourada"},{"1":"13.87225","_rn_":"Marrom"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mix_b1,full)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["call"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Model"],"name":[2],"type":["int"],"align":["right"]},{"label":["df"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Test"],"name":[7],"type":["fct"],"align":["left"]},{"label":["L.Ratio"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["p-value"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"nlme.formula(model = af_planta ~ b1/(1 + exp(b2 - b3 * das)),     data = df_grouped, fixed = b1 + b2 + b3 ~ 1, random = b1 ~         1, start = c(b1 = 120, b2 = 3, b3 = 0.05), method = \"ML\")","2":"1","3":"5","4":"1279.017","5":"1293.866","6":"-634.5083","7":"","8":"NA","9":"NA","_rn_":"mix_b1"},{"1":"nls(formula = af_planta ~ b1/(1 + exp(b2 - b3 * das)), data = df_nlm,     start = c(b1 = 120, b2 = 3, b3 = 0.05), algorithm = \"default\",     control = list(maxiter = 50, tol = 1e-05, minFactor = 0.0009765625,         printEval = FALSE, warnOnly = FALSE, scaleOffset = 0,         nDcentral = FALSE), trace = FALSE)","2":"2","3":"4","4":"1298.906","5":"1310.785","6":"-645.4530","7":"1 vs 2","8":"21.88946","9":"2.888166e-06","_rn_":"full"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="efeito-aleatório-de-cultivar-no-parâmetro-b2" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Efeito aleatório de cultivar no parâmetro b2</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mix_b2 <span class="ot">&lt;-</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nlme</span>(af_planta <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das)),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> df_grouped,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">fixed =</span> b1 <span class="sc">+</span> b2 <span class="sc">+</span> b3 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">random =</span> b2 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">start =</span> <span class="fu">c</span>(<span class="at">b1 =</span> <span class="dv">120</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b2 =</span> <span class="dv">3</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b3 =</span> <span class="fl">0.05</span>))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mix_b2)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Nonlinear mixed-effects model fit by maximum likelihood</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   Model: af_planta ~ b1/(1 + exp(b2 - b3 * das)) </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   Data: df_grouped </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">##        AIC      BIC    logLik</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   1300.806 1315.655 -645.4031</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  Formula: b2 ~ 1 | cultivar</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                b2 Residual</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">## StdDev: 0.1384259  21.3278</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:  b1 + b2 + b3 ~ 1 </span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">##       Value Std.Error  DF  t-value p-value</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## b1 98.68474  4.885571 140 20.19922       0</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## b2  7.08603  1.037717 140  6.82848       0</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="do">## b3  0.10632  0.016524 140  6.43443       0</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  Correlation: </span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="do">##    b1     b2    </span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="do">## b2 -0.533       </span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="do">## b3 -0.630  0.981</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Standardized Within-Group Residuals:</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="do">##         Min          Q1         Med          Q3         Max </span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.57074152 -0.46116531  0.02747522  0.36688390  4.75925558 </span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Observations: 144</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Groups: 2</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(mix_b2)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["b2"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.08200932","_rn_":"Dourada"},{"1":"-0.08200932","_rn_":"Marrom"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mix_b2,full)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["call"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Model"],"name":[2],"type":["int"],"align":["right"]},{"label":["df"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Test"],"name":[7],"type":["fct"],"align":["left"]},{"label":["L.Ratio"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["p-value"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"nlme.formula(model = af_planta ~ b1/(1 + exp(b2 - b3 * das)),     data = df_grouped, fixed = b1 + b2 + b3 ~ 1, random = b2 ~         1, start = c(b1 = 120, b2 = 3, b3 = 0.05), method = \"ML\")","2":"1","3":"5","4":"1300.806","5":"1315.655","6":"-645.4031","7":"","8":"NA","9":"NA","_rn_":"mix_b2"},{"1":"nls(formula = af_planta ~ b1/(1 + exp(b2 - b3 * das)), data = df_nlm,     start = c(b1 = 120, b2 = 3, b3 = 0.05), algorithm = \"default\",     control = list(maxiter = 50, tol = 1e-05, minFactor = 0.0009765625,         printEval = FALSE, warnOnly = FALSE, scaleOffset = 0,         nDcentral = FALSE), trace = FALSE)","2":"2","3":"4","4":"1298.906","5":"1310.785","6":"-645.4530","7":"1 vs 2","8":"0.09987522","9":"0.7519794","_rn_":"full"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="efeito-aleatório-de-cultivar-no-parâmetro-b3" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Efeito aleatório de cultivar no parâmetro b3</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mix_b3 <span class="ot">&lt;-</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nlme</span>(af_planta <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das)),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">method =</span> <span class="st">&quot;ML&quot;</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> df_grouped,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">fixed =</span> b1 <span class="sc">+</span> b2 <span class="sc">+</span> b3 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">random =</span> b3 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">start =</span> <span class="fu">c</span>(<span class="at">b1 =</span> <span class="dv">120</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b2 =</span> <span class="dv">3</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b3 =</span> <span class="fl">0.05</span>))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mix_b3)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Nonlinear mixed-effects model fit by maximum likelihood</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   Model: af_planta ~ b1/(1 + exp(b2 - b3 * das)) </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   Data: df_grouped </span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">##        AIC      BIC    logLik</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   1299.778 1314.627 -644.8888</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  Formula: b3 ~ 1 | cultivar</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">##                  b3 Residual</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="do">## StdDev: 0.004087845 21.11358</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:  b1 + b2 + b3 ~ 1 </span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="do">##        Value Std.Error  DF   t-value p-value</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="do">## b1 103.12518  5.725916 140 18.010251       0</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="do">## b2   6.23668  0.830821 140  7.506649       0</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="do">## b3   0.09163  0.013796 140  6.641531       0</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  Correlation: </span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="do">##    b1     b2    </span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="do">## b2 -0.567       </span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="do">## b3 -0.667  0.958</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Standardized Within-Group Residuals:</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="do">##         Min          Q1         Med          Q3         Max </span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.68233785 -0.53273958 -0.01720582  0.32371340  4.69732909 </span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Observations: 144</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of Groups: 2</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(mix_b3)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["b3"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"-0.00353355","_rn_":"Dourada"},{"1":"0.00353355","_rn_":"Marrom"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mix_b3,full)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["call"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Model"],"name":[2],"type":["int"],"align":["right"]},{"label":["df"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Test"],"name":[7],"type":["fct"],"align":["left"]},{"label":["L.Ratio"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["p-value"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"nlme.formula(model = af_planta ~ b1/(1 + exp(b2 - b3 * das)),     data = df_grouped, fixed = b1 + b2 + b3 ~ 1, random = b3 ~         1, start = c(b1 = 120, b2 = 3, b3 = 0.05), method = \"ML\")","2":"1","3":"5","4":"1299.778","5":"1314.627","6":"-644.8888","7":"","8":"NA","9":"NA","_rn_":"mix_b3"},{"1":"nls(formula = af_planta ~ b1/(1 + exp(b2 - b3 * das)), data = df_nlm,     start = c(b1 = 120, b2 = 3, b3 = 0.05), algorithm = \"default\",     control = list(maxiter = 50, tol = 1e-05, minFactor = 0.0009765625,         printEval = FALSE, warnOnly = FALSE, scaleOffset = 0,         nDcentral = FALSE), trace = FALSE)","2":"2","3":"4","4":"1298.906","5":"1310.785","6":"-645.4530","7":"1 vs 2","8":"1.128398","9":"0.2881174","_rn_":"full"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="modelo-ajustado" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Modelo ajustado</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>formula <span class="ot">&lt;-</span> af_planta <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>start_af <span class="ot">=</span> <span class="fu">c</span>(<span class="at">b1 =</span> <span class="dv">120</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">b2 =</span> <span class="dv">3</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">b3 =</span> <span class="fl">0.05</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>mod_af <span class="ot">&lt;-</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  df_modelos <span class="sc">|&gt;</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cultivar) <span class="sc">|&gt;</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">doo</span>(<span class="sc">~</span><span class="fu">nls</span>(formula,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> .,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">start =</span> start_af))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  mod_af <span class="sc">|&gt;</span> </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(data, <span class="sc">~</span>.x <span class="sc">|&gt;</span> <span class="fu">tidy</span>())) <span class="sc">|&gt;</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(data) <span class="sc">|&gt;</span> </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cultivar, term, estimate) <span class="sc">|&gt;</span> </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> term,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> estimate)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_af &lt;-</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_nlm, <span class="fu">aes</span>(das, af_planta)) <span class="sc">+</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;nls&quot;</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">formula =</span>  y <span class="sc">~</span> b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x)),</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">start =</span> start_af),</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">color =</span> cultivar)) <span class="sc">+</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean,</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>,</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">color =</span> cultivar),</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">150</span>, <span class="at">by =</span> <span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Dias após a semeadura&quot;</span>,</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(Área<span class="sc">~</span>foliar<span class="sc">~</span>(cm<span class="sc">^</span><span class="dv">2</span><span class="sc">~</span>planta<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}))) <span class="sc">+</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">120</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>  my_theme <span class="sc">+</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;brown&quot;</span>))</span></code></pre></div>
+<p><img src="nonlinear_af_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figs/curva_af.png&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code></pre></div>
+</div>
+<div id="qualidade-de-ajuste" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Qualidade de ajuste</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>get_r2 <span class="ot">&lt;-</span> <span class="cf">function</span>(model){</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  aic <span class="ot">&lt;-</span> <span class="fu">AIC</span>(model)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> model<span class="sc">$</span>m<span class="sc">$</span><span class="fu">fitted</span>()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> model<span class="sc">$</span>m<span class="sc">$</span><span class="fu">resid</span>()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  obs <span class="ot">&lt;-</span> fit <span class="sc">+</span> res</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  gof <span class="ot">&lt;-</span> <span class="fu">gof</span>(obs, fit, <span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  r2 <span class="ot">&lt;-</span> gof[<span class="fu">which</span>(<span class="fu">rownames</span>(gof) <span class="sc">==</span> <span class="st">&quot;R2&quot;</span>)]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">aic =</span> aic, <span class="at">r2 =</span> r2)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>qualidade <span class="ot">&lt;-</span> </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  mod_af <span class="sc">|&gt;</span> </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">map_dfr</span>(<span class="at">.x =</span> data,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.f =</span> <span class="sc">~</span><span class="fu">get_r2</span>(.))) <span class="sc">|&gt;</span> </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>data)</span></code></pre></div>
+</div>
+<div id="primeira-derivada" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Primeira derivada</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># primeira derivada</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(<span class="fu">expression</span>(b1<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> das))), <span class="st">&quot;das&quot;</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="do">## b1 * (exp(b2 - b3 * das) * b3)/(1 + exp(b2 - b3 * das))^2</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>dy <span class="ot">&lt;-</span> <span class="cf">function</span>(x,b1,b2,b3){</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  b1 <span class="sc">*</span> (<span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x) <span class="sc">*</span> b3)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  parameters <span class="sc">|&gt;</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">xpi =</span> b2 <span class="sc">/</span> b3,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">ypi =</span> <span class="fu">dy</span>(xpi, b1, b2, b3)) <span class="sc">|&gt;</span> </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plot_pi <span class="ot">&lt;-</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dy,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;Dourada&quot;</span>),</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">120</span>),</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">c</span>(<span class="at">b1 =</span> parameters[[<span class="dv">1</span>, <span class="dv">2</span>]],</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b2 =</span> parameters[[<span class="dv">1</span>, <span class="dv">3</span>]],</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b3 =</span> parameters[[<span class="dv">1</span>, <span class="dv">4</span>]])) <span class="sc">+</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dy,</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;Marrom&quot;</span>),</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">120</span>),</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">c</span>(<span class="at">b1 =</span> parameters[[<span class="dv">2</span>, <span class="dv">2</span>]],</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b2 =</span> parameters[[<span class="dv">2</span>, <span class="dv">3</span>]],</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b3 =</span> parameters[[<span class="dv">2</span>, <span class="dv">4</span>]])) <span class="sc">+</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(xpi, ypi, <span class="at">color =</span> cultivar),</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> parameters,</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">120</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Dias após a semeadura&quot;</span>,</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(Emissão<span class="sc">~</span>de<span class="sc">~</span>área<span class="sc">~</span>foliar<span class="sc">~</span>(cm<span class="sc">^</span><span class="dv">2</span><span class="sc">~</span>planta<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}<span class="sc">~</span>dia<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}))) <span class="sc">+</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  my_theme <span class="sc">+</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;brown&quot;</span>))</span></code></pre></div>
+</div>
+<div id="segunda-derivada" class="section level2" number="6.9">
+<h2><span class="header-section-number">6.9</span> Segunda derivada</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># segunda derivada</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(<span class="fu">expression</span>(b1 <span class="sc">*</span> (<span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x) <span class="sc">*</span> b3)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x))<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;x&quot;</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="do">## -(b1 * (exp(b2 - b3 * x) * b3 * b3)/(1 + exp(b2 - b3 * x))^2 - </span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     b1 * (exp(b2 - b3 * x) * b3) * (2 * (exp(b2 - b3 * x) * b3 * </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="do">##         (1 + exp(b2 - b3 * x))))/((1 + exp(b2 - b3 * x))^2)^2)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>d2y <span class="ot">&lt;-</span> <span class="cf">function</span>(x,b1,b2,b3){</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span>(b1 <span class="sc">*</span> (<span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x) <span class="sc">*</span> b3 <span class="sc">*</span> b3)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x))<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>      b1 <span class="sc">*</span> (<span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x) <span class="sc">*</span> b3) <span class="sc">*</span> (<span class="dv">2</span> <span class="sc">*</span> (<span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x) <span class="sc">*</span> b3 <span class="sc">*</span> </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>                                             (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x))))<span class="sc">/</span>((<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(b2 <span class="sc">-</span> b3 <span class="sc">*</span> x))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  parameters <span class="sc">|&gt;</span> </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">xmap =</span> (b2 <span class="sc">-</span> <span class="fl">1.3170</span>)<span class="sc">/</span>b3,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">xmdp =</span> (b2 <span class="sc">+</span> <span class="fl">1.3170</span>)<span class="sc">/</span>b3,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">ymap =</span> <span class="fu">d2y</span>(xmap, b1, b2, b3),</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">ymdp =</span> <span class="fu">d2y</span>(xmdp, b1, b2, b3),</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(qualidade)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="fu">export</span>(parameters, <span class="st">&quot;data/parameter_af.xlsx&quot;</span>)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>df_acel <span class="ot">&lt;-</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> d2y,</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;Dourada&quot;</span>),</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">120</span>),</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">c</span>(<span class="at">b1 =</span> parameters[[<span class="dv">1</span>, <span class="dv">2</span>]],</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b2 =</span> parameters[[<span class="dv">1</span>, <span class="dv">3</span>]],</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b3 =</span> parameters[[<span class="dv">1</span>, <span class="dv">4</span>]])) <span class="sc">+</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> d2y,</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;Marrom&quot;</span>),</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">120</span>),</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">c</span>(<span class="at">b1 =</span> parameters[[<span class="dv">2</span>, <span class="dv">2</span>]],</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b2 =</span> parameters[[<span class="dv">2</span>, <span class="dv">3</span>]],</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>                         <span class="at">b3 =</span> parameters[[<span class="dv">2</span>, <span class="dv">4</span>]])) <span class="sc">+</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(xmap, ymap, <span class="at">color =</span> cultivar),</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> parameters,</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">19</span>,</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(xmdp, ymdp, <span class="at">color =</span> cultivar),</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> parameters,</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">17</span>,</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(xpi, <span class="dv">0</span>, <span class="at">color =</span> cultivar),</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> parameters,</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">15</span>,</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">120</span>, <span class="at">by =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Dias após a semeadura&quot;</span>,</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Aceleração da emissão de área foliar&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>  my_theme <span class="sc">+</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;brown&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange_ggplot</span>(plot_pi, df_acel,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">tag_levels =</span> <span class="st">&quot;a&quot;</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>)</span></code></pre></div>
+<p><img src="nonlinear_af_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;figs/pontos_criticos_af.png&quot;</span>, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="section-info" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Section info</h1>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">## R version 4.2.0 (2022-04-22 ucrt)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Running under: Windows 10 x64 (build 22621)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Matrix products: default</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="do">## locale:</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] LC_COLLATE=Portuguese_Brazil.utf8  LC_CTYPE=Portuguese_Brazil.utf8   </span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] LC_MONETARY=Portuguese_Brazil.utf8 LC_NUMERIC=C                      </span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [5] LC_TIME=Portuguese_Brazil.utf8    </span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="do">## attached base packages:</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] tcltk     stats     graphics  grDevices utils     datasets  methods  </span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [8] base     </span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="do">## other attached packages:</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] hydroGOF_0.4-0    rpanel_1.1-5.1    nlme_3.1-157      broom_1.0.1      </span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] metan_1.17.0.9000 MASS_7.3-58.1     lmtest_0.9-40     zoo_1.8-11       </span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] nlstools_2.0-0    car_3.1-1         carData_3.0-5     forcats_0.5.2    </span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] stringr_1.4.1     dplyr_1.0.10      purrr_0.3.5       readr_2.1.3      </span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [17] tidyr_1.2.1       tibble_3.1.8      ggplot2_3.4.0     tidyverse_1.3.2  </span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="do">## [21] rio_0.5.29        leaflet_2.1.1    </span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="do">## loaded via a namespace (and not attached):</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] minqa_1.2.5         googledrive_2.0.0   colorspace_2.0-3   </span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="do">##   [4] ggsignif_0.6.4      ellipsis_0.3.2      class_7.3-20       </span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="do">##   [7] fs_1.5.2            rstudioapi_0.14     proxy_0.4-27       </span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [10] ggpubr_0.4.0        farver_2.1.1        ggrepel_0.9.2      </span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  [13] fansi_1.0.3         lubridate_1.9.0     mathjaxr_1.6-0     </span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  [16] xml2_1.3.3          splines_4.2.0       cachem_1.0.6       </span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [19] knitr_1.40          polyclip_1.10-4     polynom_1.4-1      </span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  [22] jsonlite_1.8.3      nloptr_2.0.3        dbplyr_2.2.1       </span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  [25] ggforce_0.4.1       compiler_4.2.0      httr_1.4.4         </span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  [28] backports_1.4.1     assertthat_0.2.1    Matrix_1.5-1       </span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  [31] fastmap_1.1.0       gargle_1.2.1        cli_3.3.0          </span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  [34] tweenr_2.0.2        htmltools_0.5.2     tools_4.2.0        </span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  [37] lmerTest_3.1-3      gtable_0.3.1        glue_1.6.2         </span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  [40] Rcpp_1.0.9          cellranger_1.1.0    jquerylib_0.1.4    </span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  [43] vctrs_0.5.0         crosstalk_1.2.0     xfun_0.31          </span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  [46] lme4_1.1-31         openxlsx_4.2.5.1    rvest_1.0.3        </span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a><span class="do">##  [49] timechange_0.1.1    lifecycle_1.0.3     rstatix_0.7.1      </span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="do">##  [52] googlesheets4_1.0.1 scales_1.2.1        gstat_2.1-0        </span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a><span class="do">##  [55] ragg_1.2.4          hms_1.1.2           RColorBrewer_1.1-3 </span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a><span class="do">##  [58] yaml_2.3.5          curl_4.3.3          sass_0.4.2         </span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a><span class="do">##  [61] reshape_0.8.9       stringi_1.7.8       highr_0.9          </span></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="do">##  [64] maptools_1.1-5      e1071_1.7-12        boot_1.3-28        </span></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="do">##  [67] zip_2.2.2           systemfonts_1.0.4   intervals_0.15.2   </span></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="do">##  [70] rlang_1.0.6         pkgconfig_2.0.3     evaluate_0.18      </span></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="do">##  [73] lattice_0.20-45     patchwork_1.1.2     htmlwidgets_1.5.4  </span></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="do">##  [76] labeling_0.4.2      tidyselect_1.2.0    GGally_2.1.2       </span></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="do">##  [79] hydroTSM_0.6-0      plyr_1.8.7          magrittr_2.0.3     </span></span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a><span class="do">##  [82] bookdown_0.29       R6_2.5.1            generics_0.1.3     </span></span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a><span class="do">##  [85] automap_1.0-16      DBI_1.1.3           pillar_1.8.1       </span></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="do">##  [88] haven_2.5.1         foreign_0.8-82      withr_2.5.0        </span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a><span class="do">##  [91] mgcv_1.8-40         xts_0.12.2          abind_1.4-5        </span></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a><span class="do">##  [94] sp_1.5-1            spacetime_1.2-8     modelr_0.1.9       </span></span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a><span class="do">##  [97] crayon_1.5.2        utf8_1.2.2          tzdb_0.3.0         </span></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a><span class="do">## [100] rmarkdown_2.17      grid_4.2.0          readxl_1.4.1       </span></span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="do">## [103] data.table_1.14.4   FNN_1.1.3.1         rmdformats_1.0.4   </span></span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="do">## [106] reprex_2.0.2        digest_0.6.29       numDeriv_2016.8-1.1</span></span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="do">## [109] textshaping_0.3.6   munsell_0.5.0       bslib_0.4.1</span></span></code></pre></div>
+</div>
+</div>
+
+   
+   
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+			
+ 		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: true },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,33 @@
+name: rbras66
+output_dir: docs
+exclude: ["*.docx", "*.pptx", "*.pdf", "*.R", "*.tmp"]
+output:
+  rmdformats::readthedown:
+    toc_depth: 3
+    use_bookdown: true
+    number_sections: true
+    highlight: tango
+    df_print: paged
+    lightbox: true
+    gallery: true
+navbar:
+  title: RBras66 - Floripa
+  left:
+  - text: Sobre
+    icon: fa fa-home
+    href: index.html
+  - text: "Modelos"
+    href: models.html
+  - text: "Área foliar"
+    href: nonlinear_af.html
+  - text: "Número de folhas"
+    href: nonlinear_nfol.html
+  - text: "Tamanho folha"
+    href: nonlinear_amedfol.html
+  - text: "Doi"
+    icon: ai ai-doi ai
+    href: ""
+  right:
+  - text: pliman
+    icon: fa-github
+    href: https://github.com/TiagoOlivoto/pliman

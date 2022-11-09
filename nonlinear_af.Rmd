@@ -1,0 +1,386 @@
+% Evolução da área foliar de duas cultivares de linho revelada pelo modelo Logístico 
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(cache = FALSE,
+                      comment = "##",
+                      collapse = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+
+```
+
+
+# Pacotes
+
+
+```{r warning=FALSE, message=FALSE}
+library(rio)
+library(tidyverse)
+library(metan)
+library(broom)
+library(nlme)
+library(rpanel)
+library(hydroGOF)
+
+my_theme <- 
+  theme_bw(base_size = 16) +
+  theme(
+    panel.grid.minor = element_blank(), #remove minor gridlines
+    legend.position = "bottom",
+    legend.title = element_blank()
+  )
+```
+
+
+# Dados
+```{r}
+df <- import("data/area_foliar.xlsx")
+df_ap <- import("data/df_ap.xlsx")
+
+```
+
+
+# Computar estatísticas
+```{r}
+# criar as médias
+df_nlm <-
+  df |>
+  group_by(data, das, bloco, cultivar, planta) |>
+  summarise(af_planta = sum(area),
+            n = n(),
+            area_media = mean(area),
+            comp_medio = mean(length)) |>
+  left_join(df_ap) |> 
+  ungroup()
+
+# média cultivar das
+df_modelos <- 
+  df_nlm |> 
+  means_by(das, cultivar) |> 
+  mutate(das = as.numeric(das))
+
+df_grouped <- 
+  groupedData(formula = area_media ~ das|cultivar, 
+              data = df_nlm,
+              order.groups = FALSE)
+
+
+```
+
+# Descritiva
+```{r}
+ggplot(df_nlm, aes(das, af_planta, color = cultivar)) +
+  stat_summary(fun = mean,
+               geom = "line",
+               position = position_dodge(width = 1)) +
+  stat_summary(fun.data = mean_se,
+               geom = "errorbar",
+               position = position_dodge(width = 1),
+               width = 1) +
+  my_theme +
+  scale_color_manual(values = c("gold", "brown")) +
+  stat_summary(fun = mean,
+               geom = "point",
+               size = 3,
+               position = position_dodge(width = 1),
+               show.legend = FALSE) +
+  my_theme +
+    scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Cultivar",
+       y = expression(Área~foliar~da~planta~(cm^2~planta^{-1}))) +
+  theme(legend.position = "bottom")
+
+
+ggsave("figs/desc_af.png", width = 12, height = 6)
+```
+
+
+# Relação área foliar x altura de planta
+```{r}
+df_nlm |> 
+  ggplot(aes(cp, af_planta, color = cultivar)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("gold", "brown")) +
+  labs(x = "Comprimento da planta (cm)",
+       y = expression(Área~foliar~da~planta~(cm^2~planta^{-1}))) +
+  ggpubr::stat_regline_equation(aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))) +
+  my_theme 
+
+ggsave("figs/cp_af.png", width = 8, height = 6)
+```
+
+# Modelos não lineares
+## Chutes iniciais
+```{r eval=FALSE}
+source("https://raw.githubusercontent.com/walmes/wzRfun/master/R/rp.nls.R")
+
+model <- af_planta ~ b1 - (b2*exp(-b3*das))
+start_brody <- c(b1 = 100,
+                 b2 = 20,
+                 b3 = 0.1)
+
+model <- af_planta ~ b1/(1 + exp(b2 - b3 * das))
+start <- list(b1 = c(init = 20, from = 20, to = 200),
+              b2 = c(init = 1, from = 1, to = 200),
+              b3 = c(init = 0.01, from = 0, to = 5))
+
+par_mvr <- rp.nls(model = model,
+                  data = df_nlm |> as.data.frame(),
+                  start = start)
+```
+
+
+## Full model
+```{r}
+# full model
+
+full <- 
+  nls(af_planta ~ b1/(1 + exp(b2 - b3 * das)),
+      data = df_nlm,
+      start = c(b1 = 120,
+                b2 = 3,
+                b3 = 0.05))
+
+```
+
+## Efeito aleatório de cultivar no parâmetro b1
+```{r}
+mix_b1 <- 
+  nlme(af_planta ~ b1/(1 + exp(b2 - b3 * das)),
+       method = "ML",
+       data = df_grouped,
+       fixed = b1 + b2 + b3 ~ 1,
+       random = b1 ~ 1,
+       start = c(b1 = 120,
+                 b2 = 3,
+                 b3 = 0.05))
+summary(mix_b1)
+ranef(mix_b1)
+anova(mix_b1,full)
+```
+
+## Efeito aleatório de cultivar no parâmetro b2
+```{r}
+mix_b2 <- 
+  nlme(af_planta ~ b1/(1 + exp(b2 - b3 * das)),
+       method = "ML",
+       data = df_grouped,
+       fixed = b1 + b2 + b3 ~ 1,
+       random = b2 ~ 1,
+       start = c(b1 = 120,
+                 b2 = 3,
+                 b3 = 0.05))
+summary(mix_b2)
+ranef(mix_b2)
+anova(mix_b2,full)
+```
+
+
+## Efeito aleatório de cultivar no parâmetro b3
+```{r}
+mix_b3 <- 
+  nlme(af_planta ~ b1/(1 + exp(b2 - b3 * das)),
+       method = "ML",
+       data = df_grouped,
+       fixed = b1 + b2 + b3 ~ 1,
+       random = b3 ~ 1,
+       start = c(b1 = 120,
+                 b2 = 3,
+                 b3 = 0.05))
+summary(mix_b3)
+ranef(mix_b3)
+anova(mix_b3,full)
+```
+
+
+
+## Modelo ajustado
+```{r}
+formula <- af_planta ~ b1/(1 + exp(b2 - b3 * das))
+start_af = c(b1 = 120,
+             b2 = 3,
+             b3 = 0.05)
+mod_af <- 
+  df_modelos |> 
+  group_by(cultivar) |> 
+  doo(~nls(formula,
+           data = .,
+           start = start_af))
+
+parameters <- 
+  mod_af |> 
+  mutate(data = map(data, ~.x |> tidy())) |> 
+  unnest(data) |> 
+  select(cultivar, term, estimate) |> 
+  pivot_wider(names_from = term,
+              values_from = estimate)
+
+
+# plot_af <-
+ggplot(df_nlm, aes(das, af_planta)) +
+  geom_smooth(method = "nls",
+              method.args = list(formula =  y ~ b1/(1 + exp(b2 - b3 * x)),
+                                 start = start_af),
+              se = FALSE,
+              aes(color = cultivar)) +
+  stat_summary(fun = mean,
+               geom = "point",
+               aes(color = cultivar),
+               size = 3,
+               position = position_dodge(width = 1)) +
+  scale_y_continuous(breaks = seq(0, 150, by = 25)) +
+  labs(x = "Dias após a semeadura",
+       y = expression(Área~foliar~(cm^2~planta^{-1}))) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  my_theme +
+  scale_color_manual(values = c("gold", "brown"))
+
+ggsave("figs/curva_af.png", width = 8, height = 5)
+```
+
+
+## Qualidade de ajuste
+```{r}
+
+get_r2 <- function(model){
+  aic <- AIC(model)
+  fit <- model$m$fitted()
+  res <- model$m$resid()
+  obs <- fit + res
+  gof <- gof(obs, fit, digits = 4)
+  r2 <- gof[which(rownames(gof) == "R2")]
+  data.frame(aic = aic, r2 = r2)
+}
+
+qualidade <- 
+  mod_af |> 
+  mutate(map_dfr(.x = data,
+                 .f = ~get_r2(.))) |> 
+  select(-data)
+
+```
+
+
+## Primeira derivada
+```{r}
+# primeira derivada
+D(expression(b1/(1 + exp(b2 - b3 * das))), "das")
+
+dy <- function(x,b1,b2,b3){
+  b1 * (exp(b2 - b3 * x) * b3)/(1 + exp(b2 - b3 * x))^2
+}
+
+parameters <- 
+  parameters |> 
+  mutate(xpi = b2 / b3,
+         ypi = dy(xpi, b1, b2, b3)) |> 
+  as.data.frame()
+
+plot_pi <-
+  ggplot() + 
+  stat_function(fun = dy,
+                aes(color = "Dourada"),
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[1, 2]],
+                         b2 = parameters[[1, 3]],
+                         b3 = parameters[[1, 4]])) +
+  stat_function(fun = dy,
+                aes(color = "Marrom"),
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[2, 2]],
+                         b2 = parameters[[2, 3]],
+                         b3 = parameters[[2, 4]])) +
+  geom_point(aes(xpi, ypi, color = cultivar),
+             data = parameters,
+             size = 3,
+             show.legend = FALSE) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Dias após a semeadura",
+       y = expression(Emissão~de~área~foliar~(cm^2~planta^{-1}~dia^{-1}))) +
+  my_theme +
+  scale_color_manual(values = c("gold", "brown"))
+
+```
+
+
+
+
+## Segunda derivada
+```{r}
+# segunda derivada
+D(expression(b1 * (exp(b2 - b3 * x) * b3)/(1 + exp(b2 - b3 * x))^2), "x")
+
+d2y <- function(x,b1,b2,b3){
+  -(b1 * (exp(b2 - b3 * x) * b3 * b3)/(1 + exp(b2 - b3 * x))^2 - 
+      b1 * (exp(b2 - b3 * x) * b3) * (2 * (exp(b2 - b3 * x) * b3 * 
+                                             (1 + exp(b2 - b3 * x))))/((1 + exp(b2 - b3 * x))^2)^2)
+}
+
+parameters <- 
+  parameters |> 
+  mutate(xmap = (b2 - 1.3170)/b3,
+         xmdp = (b2 + 1.3170)/b3,
+         ymap = d2y(xmap, b1, b2, b3),
+         ymdp = d2y(xmdp, b1, b2, b3),
+  ) |> 
+  left_join(qualidade)
+export(parameters, "data/parameter_af.xlsx")
+
+
+df_acel <-
+  ggplot() + 
+  geom_hline(yintercept = 0) +
+  stat_function(fun = d2y,
+                aes(color = "Dourada"),
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[1, 2]],
+                         b2 = parameters[[1, 3]],
+                         b3 = parameters[[1, 4]])) +
+  stat_function(fun = d2y,
+                aes(color = "Marrom"),
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[2, 2]],
+                         b2 = parameters[[2, 3]],
+                         b3 = parameters[[2, 4]])) +
+  geom_point(aes(xmap, ymap, color = cultivar),
+             data = parameters,
+             size = 3,
+             shape = 19,
+             show.legend = FALSE) +
+  geom_point(aes(xmdp, ymdp, color = cultivar),
+             data = parameters,
+             size = 3,
+             shape = 17,
+             show.legend = FALSE) +
+  geom_point(aes(xpi, 0, color = cultivar),
+             data = parameters,
+             size = 3,
+             shape = 15,
+             show.legend = FALSE) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Dias após a semeadura",
+       y = "Aceleração da emissão de área foliar") +
+  my_theme +
+  scale_color_manual(values = c("gold", "brown"))
+
+```
+
+```{r}
+arrange_ggplot(plot_pi, df_acel,
+               tag_levels = "a",
+               guides = "collect")
+
+ggsave("figs/pontos_criticos_af.png", width = 12, height = 6)
+```
+
+
+# Section info
+```{r}
+sessionInfo()
+```
+

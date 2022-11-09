@@ -1,0 +1,60 @@
+% Sobre
+
+![](figs/banner.png)
+
+# Sobre este material {.unnumbered}
+
+Neste website você pode encontrar os dados e scripts utilizados nas análises dos seguintes trabalhos apresentados na 66$^a$ Reunião Anual da Região Brasileira da Sociedade Internacional de Biometria (RBras)
+
+* Seleção de modelos de crescimento para descrição da área foliar do linho   
+* Evolução da área foliar de duas cultivares de linho revelada pelo modelo Logístico   
+* O modelo logístico e seus pontos críticos sugerem diferença no padrão de expansão foliar de cultivares de linho   
+* Padrão de emissão de folhas de cultivares de linho revelado pelo modelo logístico e seus pontos críticos 
+
+
+# Como reproduzir? {.unnumbered}
+
+-   Faça o [Download dos dados]() do repositório github;
+-   Abra o projeto `paper_flaxgrowth..Rproj` no RStudio;
+-   Opcionalmente, altere funções e argumentos;
+-   Re-knit o documento para ver os resultados.
+
+
+# Licença  {.unnumbered}
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/TiagoOlivoto/tiagoolivoto/master/static/img/gemsr/license.jpg" alt="Licença Creative Commons" style="border-width:0" width="300" height="80"/></a><br />Este conteúdo está licenciado com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons - Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional</a>. O resumo legível da licença afirma que você tem o direito de:
+
+-   **Compartilhar** --- copie e redistribua o material em qualquer meio ou formato.
+
+-   **Adaptar** --- remixar, transformar e construir sobre o material
+
+-   **Atribuir** --- Você deve dar o crédito apropriado, fornecer um link para a licença e indicar se foram feitas alterações. Você deve fazê-lo sob quaisquer circunstâncias razoáveis, mas de forma alguma sugerindo que o licenciante endossa você ou seu uso.
+
+Esta licença e válida sob os seguintes termos:
+
+-   **Não comercial (NC)** --- Você não pode usar o material para fins comerciais.
+-   **Share Alike (SA)** --- Se você remixar, transformar ou desenvolver o material, deverá distribuir suas contribuições sob a mesma licença do original.
+-   **Sem restrições adicionais** --- Você não pode aplicar termos legais ou medidas tecnológicas que restrinjam legalmente outras pessoas de fazer qualquer coisa que a licença permita.
+
+# Selo DC  {.unnumbered}
+
+<a rel="license" href="https://bendeivide.github.io/dc/" target="_blank" rel="noopener"><img src="https://github.com/bendeivide/dc/raw/main/SeloDC-preto2.png" alt="Licença Creative Commons" style="border-width:0" width="500" height="200"/></a>
+
+O selo [selo Democratizando Conhecimento](https://bendeivide.github.io/dc/) (DC) é uma ideia criada pelo Prof. [Ben Dêivid](https://bendeivide.github.io/). O selo é compatível com a licença [Creative Commons CC BY NC SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) e é utilizado aqui para garantir que o acesso de todo esse material seja livre, gratuíto e de código aberto.
+
+# Visite-nos!  {.unnumbered}
+
+```{r}
+#| echo: false
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=-48.505555555556,
+             lat=-27.582222222222,
+             popup="The birthplace of R")
+
+```
+
+```{=html}
+<div align='center'><a href='https://www.free-website-hit-counter.com'><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=138602&s=2' border='0' alt='Free Website Hit Counter'></a><br / ><small><a href='https://www.free-website-hit-counter.com' title="Free Website Hit Counter">Free website hit counter</a></small></div>
+```

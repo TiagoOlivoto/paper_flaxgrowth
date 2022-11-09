@@ -1,0 +1,325 @@
+% Padrão de emissão de folhas de cultivares de linho revelado pelo modelo logístico e seus pontos críticos 
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(cache = FALSE,
+                      comment = "##",
+                      collapse = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+
+```
+
+
+# Pacotes
+
+
+```{r warning=FALSE, message=FALSE}
+library(rio)
+library(tidyverse)
+library(metan)
+library(broom)
+library(nlme)
+library(rpanel)
+
+my_theme <- 
+  theme_bw(base_size = 16) +
+  theme(
+    panel.grid.minor = element_blank(), #remove minor gridlines
+    legend.position = "bottom",
+    legend.title = element_blank()
+  )
+```
+
+
+
+# Dados
+```{r}
+df <- import("data/area_foliar.xlsx")
+df_ap <- import("data/df_ap.xlsx")
+```
+
+
+# Computar estatístias
+```{r}
+# criar as médias
+df_nlm <-
+  df |>
+  group_by(data, das, bloco, cultivar, planta) |>
+  summarise(n = n()) |>
+  left_join(df_ap) |> 
+  mutate(das = as.numeric(das)) |> 
+  ungroup()
+
+
+# média cultivar das
+df_modelos <- 
+  df_nlm |> 
+  means_by(das, cultivar) |> 
+  mutate(das = as.numeric(das))
+
+df_grouped <- 
+  groupedData(formula = n ~ das|cultivar, 
+              data = df_nlm,
+              order.groups = FALSE)
+
+
+```
+
+
+# Descritiva
+```{r}
+ggstatsplot::ggbetweenstats(df_nlm, cultivar, n,
+                            plot.type = "box",
+                            bf.message = FALSE,
+                            ylab = "Número de folhas por planta") +
+  scale_color_manual(values = c("gold", "brown"))
+ggsave("figs/t_nf.png", width = 6, height = 4)
+```
+
+
+# Modelos não lineares
+## Chutes iniciais
+```{r eval=FALSE}
+source("https://raw.githubusercontent.com/walmes/wzRfun/master/R/rp.nls.R")
+
+model <- af_planta ~ b1/(1 + exp(b2 - b3 * das))
+start <- list(b1 = c(init = 20, from = 20, to = 200),
+              b2 = c(init = 1, from = 1, to = 20),
+              b3 = c(init = 0.01, from = 0, to = 0.2))
+
+par_mvr <- rp.nls(model = model,
+                  data = df_nlm |> as.data.frame(),
+                  start = start)
+```
+
+# Número de folhas
+## Full model
+```{r}
+# full model
+full <- 
+  nls(n ~ b1/(1 + exp(b2 - b3 * das)),
+      data = df_nlm,
+      start = c(b1 = 40,
+                b2 = 3,
+                b3 = 0.05))
+
+```
+
+## Efeito aleatório de cultivar no parâmetro b1
+```{r}
+mix_b1 <- 
+  nlme(n ~ b1/(1 + exp(b2 - b3 * das)),
+       method = "ML",
+       data = df_grouped,
+       fixed = b1 + b2 + b3 ~ 1,
+       random = b1 ~ 1,
+       start = c(b1 = 120,
+                 b2 = 3,
+                 b3 = 0.05))
+summary(mix_b1)
+ranef(mix_b1)
+anova(mix_b1,full)
+```
+
+## Efeito aleatório de cultivar no parâmetro b2
+```{r}
+mix_b2 <- 
+  nlme(n ~ b1/(1 + exp(b2 - b3 * das)),
+       method = "ML",
+       data = df_grouped,
+       fixed = b1 + b2 + b3 ~ 1,
+       random = b2 ~ 1,
+       start = c(b1 = 120,
+                 b2 = 3,
+                 b3 = 0.05))
+summary(mix_b2)
+ranef(mix_b2)
+anova(mix_b2,full)
+```
+
+
+## Efeito aleatório de cultivar no parâmetro b3
+```{r}
+mix_b3 <- 
+  nlme(n ~ b1/(1 + exp(b2 - b3 * das)),
+       method = "ML",
+       data = df_grouped,
+       fixed = b1 + b2 + b3 ~ 1,
+       random = b3 ~ 1,
+       start = c(b1 = 120,
+                 b2 = 3,
+                 b3 = 0.05))
+summary(mix_b3)
+ranef(mix_b3)
+anova(mix_b3,full)
+```
+
+
+
+## Modelo ajustado
+```{r}
+formula <- n ~ b1/(1 + exp(b2 - b3 * das))
+start_af = c(b1 = 40,
+             b2 = 3,
+             b3 = 0.05)
+mod_af <- nls(formula,
+              data = df_modelos,
+              start = start_af)
+
+
+parameters <-
+  mod_af |>
+  tidy() |> 
+  select(term, estimate) |> 
+    pivot_wider(names_from = term,
+              values_from = estimate)
+
+parameters[[1]]/(1 + exp(parameters[[2]] - parameters[[3]] * 33.69))
+parameters[[1]]/(1 + exp(parameters[[2]] - parameters[[3]] * 67.73))
+
+# plot_af <-
+ggplot(df_nlm, aes(das, n)) +
+  geom_smooth(method = "nls",
+              method.args = list(formula =  y ~ b1/(1 + exp(b2 - b3 * x)),
+                                 start = start_af),
+              se = FALSE, size = 2) +
+    geom_smooth(method = "nls",
+              method.args = list(formula =  y ~ b1/(1 + exp(b2 - b3 * x)),
+                                 start = start_af),
+              se = FALSE,
+              aes(color = cultivar),
+              linetype = 2) +
+  stat_summary(fun = mean,
+               geom = "point",
+               aes(color = cultivar),
+               size = 3,
+               position = position_dodge(width = 0.8)) +
+  scale_y_continuous(breaks = seq(20, 150, by = 20)) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Dias após a semeadura",
+       y = "Número de folhas por planta") +
+  my_theme +
+  scale_color_manual(values = c("gold", "brown"))
+
+ggsave("figs/curva_nf.png", width = 8, height = 5)
+```
+
+
+
+## Qualidade de ajuste
+```{r}
+
+get_r2 <- function(model){
+  aic <- AIC(model)
+  fit <- model$m$fitted()
+  res <- model$m$resid()
+  obs <- fit + res
+  gof <- gof(obs, fit, digits = 4)
+  r2 <- gof[which(rownames(gof) == "R2")]
+  data.frame(aic = aic, r2 = r2)
+}
+
+qualidade <- get_r2(mod_af)
+
+```
+
+## Primeira derivada
+```{r}
+# primeira derivada
+D(expression(b1/(1 + exp(b2 - b3 * das))), "das")
+
+dy <- function(x,b1,b2,b3){
+  b1 * (exp(b2 - b3 * x) * b3)/(1 + exp(b2 - b3 * x))^2
+}
+
+parameters <- 
+  parameters |> 
+  mutate(xpi = b2 / b3,
+         ypi = dy(xpi, b1, b2, b3))
+
+plot_pi <-
+  ggplot() + 
+  stat_function(fun = dy,
+                size = 1,
+                xlim = c(0, 120),
+                args = c(b1 = parameters[[1, 1]],
+                         b2 = parameters[[1, 2]],
+                         b3 = parameters[[1, 3]])) +
+  geom_point(aes(xpi, ypi),
+             data = parameters,
+             size = 3) +
+  labs(x = "Dias após a semeadura",
+       y = "Taxa de emissão de folhas por planta") +
+  my_theme +
+  scale_color_manual(values = c("gold", "brown"))
+```
+
+
+
+
+## Segunda derivada
+```{r}
+# segunda derivada
+D(expression(b1 * (exp(b2 - b3 * x) * b3)/(1 + exp(b2 - b3 * x))^2), "x")
+
+d2y <- function(x,b1,b2,b3){
+  -(b1 * (exp(b2 - b3 * x) * b3 * b3)/(1 + exp(b2 - b3 * x))^2 - 
+      b1 * (exp(b2 - b3 * x) * b3) * (2 * (exp(b2 - b3 * x) * b3 * 
+                                             (1 + exp(b2 - b3 * x))))/((1 + exp(b2 - b3 * x))^2)^2)
+}
+
+parameters <- 
+  parameters |> 
+  mutate(xmap = (b2 - 1.3170)/b3,
+         xmdp = (b2 + 1.3170)/b3,
+         ymap = d2y(xmap, b1, b2, b3),
+         ymdp = d2y(xmdp, b1, b2, b3),
+  ) |> 
+  bind_cols(qualidade)
+
+export(parameters, "data/parametros_nfol.xlsx")
+
+df_acel <-
+  ggplot() + 
+  geom_hline(yintercept = 0) +
+  stat_function(fun = d2y,
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[1, 1]],
+                         b2 = parameters[[1, 2]],
+                         b3 = parameters[[1, 3]])) +
+  geom_point(aes(xmap, ymap),
+             data = parameters,
+             size = 3,
+             shape = 19) +
+  geom_point(aes(xmdp, ymdp),
+             data = parameters,
+             size = 3,
+             shape = 17) +
+    geom_point(aes(xpi, 0),
+             data = parameters,
+             size = 3,
+             shape = 15,
+             show.legend = FALSE) +
+    scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Dias após a semeadura",
+       y = "Aceleração da emissão de folhas") +
+  my_theme
+
+```
+
+
+```{r}
+arrange_ggplot(plot_pi, df_acel,
+               tag_levels = "a",
+               guides = "collect")
+
+ggsave("figs/pontos_criticos_nf.png", width = 12, height = 6)
+```
+
+
+# Section info
+```{r}
+sessionInfo()
+```
+

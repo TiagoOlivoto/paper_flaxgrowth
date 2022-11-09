@@ -1,0 +1,367 @@
+% Seleção de modelos de crescimento para descrição da área foliar do linho 
+
+```{r global_options, include = FALSE}
+knitr::opts_chunk$set(cache = FALSE,
+                      comment = "##",
+                      collapse = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+
+```
+
+
+# Pacotes
+
+To reproduce the examples of this material, the R packages the following packages are needed.
+
+```{r warning=FALSE, message=FALSE}
+library(rio)
+library(tidyverse)
+library(car)
+library(nlstools)
+library(lmtest)
+library(MASS)
+library(nlstools)
+
+my_theme <- 
+  theme_bw(base_size = 14) +
+  theme(
+    panel.grid = element_blank(), #remove minor gridlines
+    axis.text = element_text(colour = "black"),
+    axis.title = element_text(color = "black")
+  )
+```
+
+
+# Raw data
+```{r}
+df_nlm <-  
+  import("data/df_models.xlsx") |> 
+  group_by(das) |> 
+  summarise(af_planta = mean(af_planta))
+```
+
+
+# Logistic
+## Fitted
+```{r}
+logi <- af_planta ~ b1/(1 + exp(b2 - b3 * das))
+start_logi <- c(b1 = 120,
+                b2 = 3,
+                b3 = 0.05)
+mod_logi <- 
+  nls(logi,
+      data = df_nlm,
+      start = start_logi)
+summary(mod_logi)
+```
+
+## Model assumptions
+```{r}
+shap_logi <- shapiro.test(residuals(mod_logi))
+# obtaining the gradient matrix
+grad_logi <- attr(mod_logi$m$fitted(),"gradient")
+# gradient matrix after removing intercept
+m0_logi <- lm(af_planta ~ -1 + grad_logi, data = df_nlm)
+# Durbin-Watson test for independence of residuals
+(DW_logi <- durbinWatsonTest(m0_logi))
+# Breusch-Pagan' test for heteroscedasticity of residuals
+(BP_logi <- bptest(m0_logi))
+```
+
+## Nonlinearity estimates
+```{r}
+mcurv_logi <- 
+  deriv3( ~ b1/(1 + exp(b2 - b3 * das)),
+          c("b1", "b2","b3"),
+          function(b1, b2, b3, das) NULL)
+
+logi_nl <- 
+  nls(af_planta ~ mcurv_logi(b1, b2, b3, das),
+      data = df_nlm,
+      start = start_logi)
+(nl_logi <- rms.curv(logi_nl))
+d <- nlsContourRSS(mod_logi)
+par(mfrow=c(1,3))
+plot(d, nlev = 5, nrow = 2)
+
+```
+
+## Confidence intervals
+```{r}
+conf_logi <- nlsBoot(mod_logi)
+conf_logi$bootCI
+```
+
+
+
+
+# Gompertz
+## Fitted
+```{r}
+gomp <- af_planta ~ b1 * exp(-b2*exp(-b3*das))
+start_gomp <- c(b1 = 120,
+                b2 = 40,
+                b3 = 0.05)
+mod_gomp <- 
+  nls(gomp,
+      data = df_nlm,
+      start = start_gomp)
+summary(mod_gomp)
+```
+
+## Model assumptions
+```{r}
+(shap_gomp <- shapiro.test(residuals(mod_gomp)))
+# obtaining the gradient matrix
+grad_gomp <- attr(mod_gomp$m$fitted(),"gradient")
+# gradient matrix after removing intercept
+m0_gomp <- lm(af_planta ~ -1 + grad_gomp, data = df_nlm)
+# Durbin-Watson test for independence of residuals
+(DW_gom <- durbinWatsonTest(m0_logi))
+# Breusch-Pagan' test for heteroscedasticity of residuals
+(BP_gom <- bptest(m0_logi))
+```
+
+
+## Nonlinearity estimates
+```{r}
+mcurv_gomp <- 
+  deriv3( ~ b1 * exp(-b2*exp(-b3*das)),
+          c("b1", "b2","b3"),
+          function(b1, b2, b3, das) NULL)
+
+gomp_nl <- 
+  nls(af_planta ~ mcurv_gomp(b1, b2, b3, das),
+      data = df_nlm,
+      start = start_gomp)
+(nl_gom <- rms.curv(gomp_nl))
+d <- nlsContourRSS(gomp_nl)
+plot(d, nlev = 10)
+
+```
+
+## Confidence intervals
+```{r}
+conf_gom <- nlsBoot(mod_gomp)
+conf_gom$bootCI
+```
+
+
+
+
+
+
+
+
+
+# Von bertallanfy
+## Fitted
+```{r}
+vbl <- af_planta ~ b1 *(1-b2*exp(-b3*das))^3
+start_vbl <- c(b1 = 50,
+               b2 = 100,
+               b3 = 0.01)
+mod_vbl <- 
+  nls(vbl,
+      data = df_nlm,
+      start = start_vbl)
+summary(mod_vbl)
+```
+
+## Model assumptions
+```{r}
+(shap_vbl <- shapiro.test(residuals(mod_vbl)))
+# obtaining the gradient matrix
+grad_vbl <- attr(mod_vbl$m$fitted(),"gradient")
+# gradient matrix after removing intercept
+m0_vbl <- lm(af_planta ~ -1 + grad_vbl, data = df_nlm)
+# Durbin-Watson test for independence of residuals
+(DW_vbl <- durbinWatsonTest(m0_vbl))
+# Breusch-Pagan' test for heteroscedasticity of residuals
+(BP_vbl <- bptest(m0_vbl))
+```
+
+
+## Nonlinearity estimates
+```{r}
+mcurv_vbl <- 
+  deriv3( ~  b1 *(1-b2*exp(-b3*das))^3,
+          c("b1", "b2","b3"),
+          function(b1, b2, b3, das) NULL)
+
+vbl_nl <- 
+  nls(af_planta ~ mcurv_vbl(b1, b2, b3, das),
+      data = df_nlm,
+      start = start_vbl)
+(nl_vbl <- rms.curv(vbl_nl))
+d <- nlsContourRSS(vbl_nl)
+plot(d, nlev = 10)
+
+```
+
+## Confidence intervals
+```{r}
+conf_vbl <- nlsBoot(mod_vbl)
+conf_vbl$bootCI
+```
+
+
+# Fitted model
+```{r}
+ggplot(df_nlm, aes(das, af_planta)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "nls",
+              method.args = list(formula =  y ~ b1/(1 + exp(b2 - b3 * x)),
+                                 start = start_logi),
+              aes(color = "Logístico"),
+              se = FALSE) +
+  geom_smooth(method = "nls",
+              method.args = list(formula =  y ~ b1 * exp(-b2 * exp(-b3 * x)),
+                                 start = start_gomp),
+              aes(color = "Gompertz"),
+              se = FALSE) +
+  geom_smooth(method = "nls",
+              method.args = list(formula =  y ~  b1 *(1-b2*exp(-b3*x))^3,
+                                 start = start_vbl),
+              aes(color = "von Bertalanffy"),
+              se = FALSE) +
+  # scale_y_continuous(breaks = seq(0, 150, by = 25)) +
+  labs(x = "Dias após a semeadura",
+       y = expression(Área~foliar~(cm^2~planta^{-1}))) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  my_theme +
+  theme(legend.position = c(.2,.8),
+        legend.box.background = element_blank(),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.title = element_blank())
+
+```
+
+
+
+
+
+
+# Tables
+```{r}
+observed <- df_nlm$af_planta
+gof_logi <- hydroGOF::gof(observed, fitted(mod_logi), digits = 5) |> t()
+gof_gom <- hydroGOF::gof(observed, fitted(mod_gomp), digits = 5) |> t()
+gof_vbl <- hydroGOF::gof(observed, fitted(mod_vbl), digits = 5) |> t()
+gofs <- rbind(gof_logi, gof_gom, gof_vbl) |> as.data.frame()
+
+
+parameters <- 
+  cbind(data.frame(model = c("Logístico", "Gompertz", "von Bertalanffy")),
+        rbind(coef(mod_logi), coef(mod_gomp), coef(mod_vbl)),
+        shapi = c(shap_logi$p.value, shap_gomp$p.value, shap_vbl$p.value),
+        BP = c(BP_logi$p.value, BP_gom$p.value, BP_vbl$p.value),
+        DW = c(DW_logi$p, DW_gom$p, DW_vbl$p),
+        nlpar = c(nl_logi$pe, nl_gom$pe, nl_vbl$pe),
+        nlint = c(nl_logi$ic, nl_gom$ic, nl_vbl$ic),
+        AIC = AIC(mod_logi, mod_gomp, mod_vbl)$AIC,
+        R2 = gofs$R2,
+        RMSE = gofs$RMSE)
+export(parameters, "data/parameters_models.xlsx")
+```
+
+
+
+## First order derivate
+```{r}
+# primeira derivada
+D(expression(b1/(1 + exp(b2 - b3 * das))), "das")
+
+dy <- function(x,b1,b2,b3){
+  b1 * (exp(b2 - b3 * x) * b3)/(1 + exp(b2 - b3 * x))^2
+}
+
+parameters <- 
+  parameters |> 
+  mutate(xpi = b2 / b3,
+         ypi = dy(xpi, b1, b2, b3)) |> 
+  as.data.frame()
+
+plot_pi <-
+  ggplot() + 
+  stat_function(fun = dy,
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[1, 2]],
+                         b2 = parameters[[1, 3]],
+                         b3 = parameters[[1, 4]])) +
+  geom_point(aes(67.30368, 4.995532),
+             size = 3,
+             show.legend = FALSE) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Dias após a semeadura",
+       y = expression(Emissão~de~área~foliar~(cm^2~planta^{-1}~dia^{-1}))) +
+  my_theme
+
+  
+  
+  
+  
+  # segunda derivada
+D(expression(b1 * (exp(b2 - b3 * x) * b3)/(1 + exp(b2 - b3 * x))^2), "x")
+
+d2y <- function(x,b1,b2,b3){
+  -(b1 * (exp(b2 - b3 * x) * b3 * b3)/(1 + exp(b2 - b3 * x))^2 - 
+      b1 * (exp(b2 - b3 * x) * b3) * (2 * (exp(b2 - b3 * x) * b3 * 
+                                             (1 + exp(b2 - b3 * x))))/((1 + exp(b2 - b3 * x))^2)^2)
+}
+
+parameters <- 
+  parameters |> 
+  mutate(xmap = (b2 - 1.3170)/b3,
+         xmdp = (b2 + 1.3170)/b3,
+         ymap = d2y(xmap, b1, b2, b3),
+         ymdp = d2y(xmdp, b1, b2, b3),
+  )
+
+# plota somente o logístico
+
+df_acel <-
+  ggplot() + 
+  geom_hline(yintercept = 0) +
+  stat_function(fun = d2y,
+                size = 1,
+                xlim = c(20, 120),
+                args = c(b1 = parameters[[1, 2]],
+                         b2 = parameters[[1, 3]],
+                         b3 = parameters[[1, 4]])) +
+  geom_point(aes(xmap, ymap),
+             data = parameters[1, ],
+             size = 3,
+             shape = 19,
+             show.legend = FALSE) +
+  geom_point(aes(xmdp, ymdp),
+             data = parameters[1, ],
+             size = 3,
+             shape = 17,
+             show.legend = FALSE) +
+  geom_point(aes(xpi, 0),
+             data = parameters[1, ],
+             size = 3,
+             shape = 15,
+             show.legend = FALSE) +
+  scale_x_continuous(breaks = seq(20, 120, by = 10)) +
+  labs(x = "Dias após a semeadura",
+       y = "Aceleração da emissão de área foliar") +
+  my_theme
+
+metan::arrange_ggplot(plot_pi, df_acel,
+                      tag_levels = "a")
+
+```
+
+
+
+
+# Section info
+```{r}
+sessionInfo()
+```
+
